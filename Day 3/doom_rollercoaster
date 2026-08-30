@@ -1,7 +1,7 @@
 while True:
     print("Welcome to the rollercoaster of DOOM!")
     try:
-        height_input = input("What is your height in cm? (or type 'quit' to exit)")
+        height_input = input("What is your height in cm?\n(or type 'quit' to exit)\n")
         if height_input == "quit":
             print("Thanks for visiting the rollercoaster of DOOM!")
             break
@@ -16,8 +16,6 @@ while True:
     else:
         print("Sorry you have to grow taller before you can ride.")
         continue
-
-
     if age > 17:
         print("You need an adult ticket, $18")
         bill = 18
@@ -28,8 +26,7 @@ while True:
         print("You need a youth ticket, $7")
         bill = 7
 
-    wants_photo = input("Do YOU want to have a photo taken? Type y for Yes and n for No.\n")
-                        
+    wants_photo = input("Do YOU want to have a photo taken?\nType y for Yes and n for No.\n")       
     if wants_photo == "y": 
         bill += 5
     print(f"Your final bill is ${bill}") 
