@@ -1,7 +1,7 @@
 while True:
     print("Welcome to the rollercoaster of DOOM!")
     try:
-        height_input = int(input("What is your height in cm? (or type 'quit' to exit)"))
+        height_input = input("What is your height in cm? (or type 'quit' to exit)")
         if height_input == "quit":
             print("Thanks for visiting the rollercoaster of DOOM!")
             break
@@ -19,7 +19,7 @@ while True:
 
     if age >= 19:
         print("Your ticket price is, $18")
-    elif age >=12<= 18:
+    elif 12 >= age <= 18:
         print("Your ticket price is, $12")
     else:
         print("Your ticket price is, $7")
