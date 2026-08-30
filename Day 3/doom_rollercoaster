@@ -1,16 +1,27 @@
+# Main loop: keeps running so multiple people can use the ride booth
+# Every path either loops back to "Welcome" or exits via 'quit'
 while True:
     print("Welcome to the rollercoaster of DOOM!")
     try:
+        # Get raw text first so we can check for 'quit' before converting to a number
         height_input = input("What is your height in cm?\n(or type 'quit' to exit)\n")
+
+        # Exit condition: check the string BEFORE trying int() on it,
+        # otherwise int("quit") would crash with a ValueError
         if height_input == "quit":
             print("Thanks for visiting the rollercoaster of DOOM!")
             break
+        
+        # Safe to convert now that we know it's not "quit"
         height = int(height_input)
         age = int(input("What is your age? "))
-    except ValueError:
-        print("You can only enter numbers!")
-        continue
 
+    except ValueError:
+         # Runs if either int() conversion above fails (e.g. letters typed instead of numbers)
+        print("You can only enter numbers!")
+        continue  # skip the rest of this loop, go back to "Welcome" and ask again
+
+    # Height gate: must be tall enough to ride at all
     if height >= 120:
         print("You can ride the rollercoaster of DOOM!")
     else:
@@ -26,7 +37,11 @@ while True:
         print("You need a youth ticket, $7")
         bill = 7
 
+    # Optional add-on: photo costs $5 extra
     wants_photo = input("Do YOU want to have a photo taken?\nType y for Yes and n for No.\n")       
     if wants_photo == "y": 
         bill += 5
+
     print(f"Your final bill is ${bill}") 
+    # Note: no break here, so after printing the bill the loop goes back to "Welcome"
+    # for the next customer
