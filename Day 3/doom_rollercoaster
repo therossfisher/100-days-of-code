@@ -1,0 +1,24 @@
+while True:
+    print("Welcome to the rollercoaster of DOOM!")
+    try:
+        height_input = int(input("What is your height in cm? (or type 'quit' to exit)"))
+        if height_input == "quit":
+            print("Thanks for visiting the rollercoaster of DOOM!")
+            break
+        height = int(height_input)
+        age = int(input("What is your age? "))
+    except ValueError:
+        print("You can only enter numbers!")
+        continue
+
+    if height >= 120:
+        print("You can ride the rollercoaster of DOOM!")
+    else:
+        print("Sorry you have to grow taller before you can ride.")
+        continue
+
+    if age >= 18:
+        print("Your ticket price is, $18")
+    else:
+        print("Your ticket price is, $12")
+

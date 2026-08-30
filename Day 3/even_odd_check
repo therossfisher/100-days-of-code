@@ -1,0 +1,9 @@
+while True:
+    try:
+        number = int(input("Please enter a number... ", ))
+        print("your number is: ", number)
+        break
+    except ValueError:
+        print("Only numbers are allowed...")
+if number % 2 != 0: print("this number is odd!")
+else: print("this number is even!")
