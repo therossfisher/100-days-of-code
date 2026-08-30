@@ -17,10 +17,19 @@ while True:
         print("Sorry you have to grow taller before you can ride.")
         continue
 
-    if age >= 19:
-        print("Your ticket price is, $18")
-    elif 12 >= age <= 18:
-        print("Your ticket price is, $12")
-    else:
-        print("Your ticket price is, $7")
 
+    if age > 17:
+        print("You need an adult ticket, $18")
+        bill = 18
+    elif 12 <= age <= 17:
+        print("You need a teenage ticket, $12")
+        bill = 12
+    else:
+        print("You need a youth ticket, $7")
+        bill = 7
+
+    wants_photo = input("Do YOU want to have a photo taken? Type y for Yes and n for No.\n")
+                        
+    if wants_photo == "y": 
+        bill += 5
+    print(f"Your final bill is ${bill}") 
