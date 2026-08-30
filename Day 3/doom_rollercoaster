@@ -17,8 +17,10 @@ while True:
         print("Sorry you have to grow taller before you can ride.")
         continue
 
-    if age >= 18:
+    if age >= 19:
         print("Your ticket price is, $18")
-    else:
+    elif age >=12<= 18:
         print("Your ticket price is, $12")
+    else:
+        print("Your ticket price is, $7")
 
