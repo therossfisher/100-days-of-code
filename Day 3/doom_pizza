@@ -1,0 +1,48 @@
+print("Welcome to DOOM PIZZAS Pizza Deliveries!")
+
+pizza_bill = 0
+pizza_count = 0
+
+while True: 
+        while True: 
+            size = input("What size pizza do you want? Scared, Troubled or DOOMED: ").lower()
+            if size in ["scared", "troubled", "doomed"]:
+                break
+            print("Invalid, try again!")
+        if size == "scared":
+            pizza_bill += 15
+        elif size == "troubled":
+            pizza_bill += 20
+        else:
+            pizza_bill += 25
+        pizza_count += 1
+
+        while True:
+            pepperoni = input("Do you want pepperoni on your pizza? Y or N: ").lower()
+            if pepperoni in ["y", "n"]:
+                break
+        if pepperoni == "y" and size == "scared":
+            pizza_bill += 2
+        elif pepperoni == "y" and size == "troubled" or size == "doomed":
+            pizza_bill += 3
+
+        while True: 
+            extra_cheese = input("Do you want extra cheese? Y or N: ").lower()    
+            if extra_cheese in ["y", "n"]:
+                break
+        if extra_cheese == "y":
+            pizza_bill += 1
+
+        print("Your total is $ ", pizza_bill) 
+
+        another = input ("Do you want another pizza? Y or N: ").lower()
+        if another == "n":
+            break
+        if another == "y":
+            print(f"You've ordered {pizza_count} pizzas so far.")
+        else:
+            print("Invalid, try again!")
+
+print(f"You ordered {pizza_count} pizzas. Your total is: ${pizza_bill}")
+        
+
