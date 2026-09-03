@@ -1,0 +1,64 @@
+
+print('''
+                uuuuuuu
+             uu$$$$$$$$$$$uu
+          uu$$$$$$$$$$$$$$$$$uu
+         u$$$$$$$$$$$$$$$$$$$$$u
+        u$$$$$$$$$$$$$$$$$$$$$$$u
+       u$$$$$$$$$$$$$$$$$$$$$$$$$u
+       u$$$$$$$$$$$$$$$$$$$$$$$$$u
+       u$$$$$$"   "$$$"   "$$$$$$u
+       "$$$$"      u$u       $$$$"
+        $$$u       u$u       u$$$
+        $$$u      u$$$u      u$$$
+         "$$$$uu$$$   $$$uu$$$$"
+          "$$$$$$$"   "$$$$$$$"
+            u$$$$$$$u$$$$$$$u
+             u$"$"$"$"$"$"$u
+  uuu        $$u$ $ $ $ $u$$       uuu
+ u$$$$        $$$$$u$u$u$$$       u$$$$
+  $$$$$uu      "$$$$$$$$$"     uu$$$$$$
+u$$$$$$$$$$$uu    """""    uuuu$$$$$$$$$$
+$$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"
+ """      ""$$$$$$$$$$$uu ""$"""
+           uuuu ""$$$$$$$$$$uuu
+  u$$$uuu$$$$$$$$$uu ""$$$$$$$$$$$uuu$$$
+  $$$$$$$$$$""""           ""$$$$$$$$$$$"
+   "$$$$$"                      ""$$$$""
+     $$$"                         $$$$"
+''')
+print("Welcome to DOOM Island.\n")
+print("Your mission is to find the treasure.\n")
+
+#first move sequence
+move1 = input("You're at a crossroads. Which way do you want to go? Left or Right?\n").lower()
+if move1 in ["left", "right"]:
+    if move1 == "left":
+        print("You arrive at the shores of a lake.\n")
+    else:
+        print("You fall into a hole. Game Over.\n")
+
+                    
+#second move sequence
+move2 = input("You arrive at the shores of a scary looking lake with an island in the middle."
+              " Do you want to swim across or wait for the boat?\n").lower()
+if move2 in ["wait", "swim"]:
+    if move2 == "wait":
+        print("You cross the lake safely and arrive at"
+              " a wall with three doors: Red, Yellow, Blue.\n")
+
+
+#third move sequence
+move3 = input("Which door to you want to choose?").lower()
+if move3 in ["red", "yellow", "blue"]:
+    # else:
+        # print("Attacked by trout. Game Over.\n")
+    # door = input("Which door do you choose?\n").lower()
+    # if door == "yellow":
+        # print("You win!")
+    # elif door == "red":
+        # print("Burned by fire! Game over.")
+    # elif door == "blue":
+        # print("Eaten by beasts. Game over.")
+    # else:
+        # print("Game Over.")
