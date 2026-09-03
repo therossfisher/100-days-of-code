@@ -30,35 +30,43 @@ $$$$"""$$$$$$$$$$uuu   uu$$$$$$$$$"""$$$"
 print("Welcome to DOOM Island.\n")
 print("Your mission is to find the treasure.\n")
 
-#first move sequence
-move1 = input("You're at a crossroads. Which way do you want to go? Left or Right?\n").lower()
-if move1 in ["left", "right"]:
+while True:
+    #first move sequence
+    while True:
+        move1 = input("You're at a crossroads. Which way do you want to go? Left or Right?\n").lower()
+        if move1 in ["left", "right"]:
+            break
+        print("That doesn't work, try again...\n")
     if move1 == "left":
-        print("You arrive at the shores of a lake.\n")
+        print("You arrive at the shores of a scary looking lake"
+             " with an island in the middle.\n")
     else:
         print("You fall into a hole. Game Over.\n")
+        break  # stops the game if someone dies 
 
-                    
 #second move sequence
-move2 = input("You arrive at the shores of a scary looking lake with an island in the middle."
-              " Do you want to swim across or wait for the boat?\n").lower()
-if move2 in ["wait", "swim"]:
+    while True:
+        move2 = input("Do you want to 'swim' across or 'wait' for the boat?\n").lower()
+        if move2 in ["swim", "wait"]:
+            break
+        print("That doesn't work, try again...\n")
     if move2 == "wait":
         print("You cross the lake safely and arrive at"
               " a wall with three doors: Red, Yellow, Blue.\n")
-
+    else:
+        print("You get eaten by death fish and die. Game over.")
+        break # stops the game if someone dies
 
 #third move sequence
-move3 = input("Which door to you want to choose?").lower()
-if move3 in ["red", "yellow", "blue"]:
-    # else:
-        # print("Attacked by trout. Game Over.\n")
-    # door = input("Which door do you choose?\n").lower()
-    # if door == "yellow":
-        # print("You win!")
-    # elif door == "red":
-        # print("Burned by fire! Game over.")
-    # elif door == "blue":
-        # print("Eaten by beasts. Game over.")
-    # else:
-        # print("Game Over.")
+    while True:
+        move3 = input("Which door to you want to choose?\n").lower()
+        if move3 in ["red", "yellow", "blue"]:
+            break
+        print("That doesn't work, try again...\n")
+    if move3 == "yellow":
+        print("You find the treasure! Winning!")
+    elif move3 == "red":
+        print("Burned by fire! Game over.")
+    elif move3 == "blue":
+        print("Eaten by beasts. Game over.")
+        break
