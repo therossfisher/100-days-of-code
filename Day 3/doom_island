@@ -62,7 +62,7 @@ while True:
         move3 = input("Which door to you want to choose?\n").lower()
         if move3 in ["red", "yellow", "blue"]:
             break
-        print("That doesn't work, lefttry again...\n")
+        print("That doesn't work, try again...\n")
     if move3 == "yellow":
         print("You find the treasure! You win!")
         break
