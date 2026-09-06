@@ -1,0 +1,30 @@
+import random
+# import my_module
+#
+# random_integer = random.randint(1, 10)
+# print(random_integer)
+#
+# print(my_module.my_favorite_number)
+
+# random_number_0_to_1 = random.random() * 10
+# print(random_number_0_to_1)
+#
+# random_float = random.uniform(1, 10)
+#
+# print(random_float)
+
+
+# random_float = random.uniform(0, 1)
+#
+# if random_float >= 0.5:
+#     print("heads", random_float)
+# else:
+#     print("tails", random_float)
+
+random_heads_tails = random.randint(0, 1)
+if random_heads_tails == 0:
+    print("heads", random_heads_tails)
+else:
+    print("tails", random_heads_tails)
+
+

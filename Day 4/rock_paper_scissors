@@ -1,0 +1,102 @@
+import random
+
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+rps = [rock, paper, scissors]
+user_score = 0
+pc_score = 0
+
+while True:
+        print("Welcome to Rock, Paper, Scissors!")
+        user_choice = input("Choose one: rock, paper or scissors\n"
+                            "or type 'quit' to exit.\n").lower()
+        if user_choice == "quit":
+            print("Final player score: \n", user_score)
+            print("Final computer score: \n", pc_score)
+            if user_score > pc_score: 
+                print("You won the game!")
+            elif user_score == pc_score:
+                print("It's a tie!")
+            else: 
+                print("You lose!")
+            print("Thanks for playing!")
+            break
+        if user_choice not in ["rock", "paper", "scissors"]:
+            print("Invalid move, try again!")
+            continue
+        if user_choice == "rock":
+            print("You choose rock!")
+            user_move = rock
+            print(user_move)
+            pc_move = random.choice(rps)
+            print("Computer chooses: ", pc_move)
+        elif user_choice == "paper":
+            print("You choose paper!" )
+            user_move = paper
+            print(user_move)
+            pc_move = random.choice(rps)
+            print("Computer chooses: ", pc_move)
+        elif user_choice == "scissors":
+            print("You choose scissors!" )
+            user_move = scissors
+            print(user_move)
+            pc_move = random.choice(rps)
+            print("Computer chooses: ", pc_move)
+
+        ### ROCK MOVES
+        if pc_move == rock and user_move == rock:
+           print("Computer choose rock!\nTie! Play again!")
+        elif pc_move == rock and user_move == paper:
+            print("Computer choose rock!\nPaper beat rock. Player wins!")
+            user_score += 1
+        elif pc_move == rock and user_move == scissors:
+            print("Computer choose rock!\nRock beat scissors. Computer wins!")
+            pc_score += 1
+
+        ### PAPER MOVES
+        elif pc_move == paper and user_move == paper:
+            print("Computer choose paper!\nTie! Play again!")
+        elif pc_move == paper and user_move == rock:
+            print("Computer choose paper!\nPaper beat rock! Computer wins!")
+            pc_score += 1
+        elif pc_move == paper and user_move == scissors:
+            print("Computer choose paper!\nScissors beat paper! Player wins!")
+            user_score += 1
+
+        ### SCISSORS MOVES
+        elif pc_move == scissors and user_move == paper:
+            print("Computer choose scissors!\nScissors beat paper! Computer wins!")
+            pc_score += 1
+        elif pc_move == scissors and user_move == rock:
+            print("Computer choose scissors!\nRock beat scissors! Player wins!")
+            user_score += 1
+        elif pc_move == scissors and user_move == scissors:
+            print("Computer choose scissors!\nTie! Play again!")
+
+        print("Player score is: ", user_score)
+        print("Computer score is: ", pc_score)
