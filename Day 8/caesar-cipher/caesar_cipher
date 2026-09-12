@@ -5,7 +5,7 @@ print(logo)
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 
 
-def encrypt(original_text, shift_amount, encode_or_decode):
+def caesar(original_text, shift_amount, encode_or_decode):
     output_text = ""
 
     # Decoding is just encoding in reverse, so flip the shift direction
@@ -72,7 +72,7 @@ while True:
          continue
     
     # Run the actual cipher and print the result
-    encrypt(original_text=text, shift_amount=shift, encode_or_decode=direction)
+    caesar(original_text=text, shift_amount=shift, encode_or_decode=direction)
 
     # Second validation loop: same pattern as `direction` above, just for
     # the replay question. Keep asking until it's "yes", "no", or "quit"
