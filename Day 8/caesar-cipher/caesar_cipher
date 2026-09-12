@@ -7,29 +7,33 @@ alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'
 
 def encrypt(original_text, shift_amount, encode_or_decode):
     output_text = ""
+
     # Decoding is just encoding in reverse, so flip the shift direction
     # rather than writing a whole separate set of logic for it
     if encode_or_decode == "decode":
         shift_amount *= -1
+
     # Process the message one character at a time
     for letter in original_text:
-                # Spaces, numbers, and punctuation aren't in `alphabet` at all,
-        # so they can't be shifted - just pass them through untouched.
-        # .lower() here only affects THIS check, not the real letter below.
+
+        # Spaces, numbers, and punctuation aren't in `alphabet`pass them through untouched
+        # .lower() here only affects THIS check, not the real letter below
         if letter.lower() not in alphabet:
             output_text += letter
         else:
-            # Remember the ORIGINAL case before doing any lowercasing,
-            # so the output can match it later
+
+            # Remember the ORIGINAL case before doing any lowercasing
             was_upper = letter.isupper()
-            # Find this letter's position in the alphabet (0-25), then
-            # shift it by the requested amount. alphabet.index() needs
-            # lowercase input since `alphabet` itself is all lowercase.
+
+            # Find this letter's position in alphabet (0-25) shift it by the requested amount
+            # alphabet.index() needs lowercase input since `alphabet` itself is all lowercase
             shifted_position = alphabet.index(letter.lower()) + shift_amount
             shifted_position %= len(alphabet)
-            # Look up the actual shifted letter (always comes out lowercase,
-            # since `alphabet` is all lowercase)
+
+            # Look up the actual shifted letter
+            # (always comes out lowercase... `alphabet` is all lowercase)
             new_letter = alphabet[shifted_position]
+
             # Restore the original capitalization before adding it to the result
             if was_upper:
                  new_letter = new_letter.upper()
@@ -39,6 +43,7 @@ def encrypt(original_text, shift_amount, encode_or_decode):
 # Outer loop: represents one full "session" - keeps the program running
 # until the user explicitly quits
 while True:
+
     # Inner validation loop: keep asking until the answer is exactly
     # "encode", "decode", or "quit" - nothing else is accepted
     while True:
@@ -49,11 +54,13 @@ while True:
             if direction in ["encode", "decode", "quit"]:
                 break
             print("Invalid, try again!")
+
     # Handle quit AFTER validation, not inside it - this is the decision
     # step that acts on whatever valid answer was given
     if direction == "quit":
         print("Thank you, come again!")
         break
+
     # Ask for the message and shift amount together. If the shift isn't
     # a real number, catch it and go back to the very top (re-ask direction
     # too) rather than crashing
@@ -63,8 +70,10 @@ while True:
     except ValueError:
          print("Only numbers are allowed!")
          continue
+    
     # Run the actual cipher and print the result
     encrypt(original_text=text, shift_amount=shift, encode_or_decode=direction)
+
     # Second validation loop: same pattern as `direction` above, just for
     # the replay question. Keep asking until it's "yes", "no", or "quit"
     while True:
@@ -73,6 +82,7 @@ while True:
             if try_again in ["yes", "no", "quit"]:
                  break
             print("Invalid, try again!")
+            
     # If they said no or quit, end the whole program. Otherwise (they said
     # "yes"), there's nothing else to do here - the outer while loop just
     # naturally goes back to the top and asks for direction again
