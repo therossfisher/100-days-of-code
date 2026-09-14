@@ -1,6 +1,7 @@
 from art import logo
+
 # prints the logo
-print(logo, "\n                 Welcome to the auction house!\n")
+print(logo)
 
 # sets an empty variable for auction while loop
 run_auction = ""
@@ -35,16 +36,21 @@ while True:
 
     # truth gate for yes/no option to continue or complete auction
     while True:
+
         # asks for another bidder, yes/no option
         continue_auction = input("Does someone else need to bid?\n" \
                                     "Enter 'yes' to continue 'no' to run auction:\n")
         if continue_auction in ['yes', 'no']:
             break
         print("Invalid, try again!")
+
+    # continues the bidding process
     if continue_auction == "yes":
         run_auction = True
         print("\n" * 100)
         continue
+
+    # starts the auction and displays the winning amount
     elif continue_auction == "no":
         run_auction = False
         for bidder_name, bidder_amount in current_bids.items():
@@ -53,7 +59,9 @@ while True:
         break
     else:
         print("Type 'yes' for more bidders or 'no' to complete the auction.")
-        break
+        break 
+
+# checks the dictionary for the highest bid and declares a winner
 for name, current_bid in current_bids.items():
     if current_bid >= highest_bid:
         print(f"Highest bid is: ${highest_bid:.2f}\n{name}... you win!")
