@@ -3,9 +3,6 @@ from art import logo
 # prints the logo
 print(logo)
 
-# sets an empty variable for auction while loop
-run_auction = ""
-
 # create dictionaries for the auction users and bid amounts
 current_bids = {}
 
@@ -46,13 +43,11 @@ while True:
 
     # continues the bidding process
     if continue_auction == "yes":
-        run_auction = True
         print("\n" * 100)
         continue
 
     # starts the auction and displays the winning amount
     elif continue_auction == "no":
-        run_auction = False
         for bidder_name, bidder_amount in current_bids.items():
             print(f"{bidder_name} bids: ${bidder_amount:.2f}")
             highest_bid = max(current_bids.values())
