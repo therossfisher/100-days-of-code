@@ -23,7 +23,7 @@ while True:
 
     # use try with except to avoid value error crashes and validate inputs
     try:
-        bid = int(input("Enter your bid: "))
+        bid = float(input("Enter your bid: "))
     except ValueError:
         print("Only numbers are allowed!")
         continue
@@ -31,7 +31,7 @@ while True:
     # takes the current bid from the dictionary and hands it back to bidder
     current_bids[name] = (bid)
     current_name = name
-    print(f"Hello, {name}, your bid is: \n ${bid}")
+    print(f"Hello, {name}, your bid is: \n ${bid:.2f}")
 
     # truth gate for yes/no option to continue or complete auction
     while True:
@@ -48,7 +48,7 @@ while True:
     elif continue_auction == "no":
         run_auction = False
         for bidder_name, bidder_amount in current_bids.items():
-            print(f"Here are all the bids: {bidder_name}, ${bidder_amount}")
+            print(f"{bidder_name} bids: ${bidder_amount:.2f}")
             highest_bid = max(current_bids.values())
         break
     else:
@@ -56,6 +56,6 @@ while True:
         break
 for name, current_bid in current_bids.items():
     if current_bid >= highest_bid:
-        print(f"Highest bid is: ${highest_bid} {name} you win!")
+        print(f"Highest bid is: ${highest_bid:.2f}\n{name}... you win!")
         break
  
