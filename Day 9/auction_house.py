@@ -1,0 +1,61 @@
+from art import logo
+# prints the logo
+print(logo, "\n                 Welcome to the auction house!\n")
+
+# sets an empty variable for auction while loop
+run_auction = ""
+
+# create dictionaries for the auction users and bid amounts
+current_bids = {}
+
+current_name = {}
+
+highest_bid = 0
+
+# starts the auction loop
+while True: 
+
+    # asks for the users and bids
+    name = str(input("Enter your name: "))
+    if name == "":
+        print("You must enter a name to continue!")
+        continue
+
+    # use try with except to avoid value error crashes and validate inputs
+    try:
+        bid = int(input("Enter your bid: "))
+    except ValueError:
+        print("Only numbers are allowed!")
+        continue
+
+    # takes the current bid from the dictionary and hands it back to bidder
+    current_bids[name] = (bid)
+    current_name = name
+    print(f"Hello, {name}, your bid is: \n ${bid}")
+
+    # truth gate for yes/no option to continue or complete auction
+    while True:
+        # asks for another bidder, yes/no option
+        continue_auction = input("Does someone else need to bid?\n" \
+                                    "Enter 'yes' to continue 'no' to run auction:\n")
+        if continue_auction in ['yes', 'no']:
+            break
+        print("Invalid, try again!")
+    if continue_auction == "yes":
+        run_auction = True
+        print("\n" * 100)
+        continue
+    elif continue_auction == "no":
+        run_auction = False
+        for bidder_name, bidder_amount in current_bids.items():
+            print(f"Here are all the bids: {bidder_name}, ${bidder_amount}")
+            highest_bid = max(current_bids.values())
+        break
+    else:
+        print("Type 'yes' for more bidders or 'no' to complete the auction.")
+        break
+for name, current_bid in current_bids.items():
+    if current_bid >= highest_bid:
+        print(f"Highest bid is: ${highest_bid} {name} you win!")
+        break
+ 
