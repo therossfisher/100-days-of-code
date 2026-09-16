@@ -10,48 +10,63 @@
 
 import random
 
-# deal both user and computer a starting hand of 2 random card values
+## deal both user and computer a starting hand of 2 random card values
+## detect when computer or user has blackjack (A + 10 value cards)# if computer gets blackjack, then user loses, (even if user also has blackjack)
+## if user gets blackjack they win unless computer also has blackjack
 
-cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+## calculate users and computers scores based on their card values
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10 ,10, 10 ]
 
 player_cards = []
 
 dealer_cards = []
 
-player_score = sum(player_cards)
+player_score = 0
 
-dealer_score = sum(dealer_cards)
+dealer_score = 0
+
+dealer_blackjack = dealer_cards == [10,11] or dealer_cards == [11,10]
+player_blackjack = player_cards == [10,11] or player_cards == [11,10]
 
 play_blackjack = True
+dealing = True
 
-while play_blackjack:
+def start_dealing(player_cards, dealer_cards, player_score, dealer_score):
         while len(player_cards) < 2:
             player_cards.append(random.choice(cards))
-            print(player_cards)
+            player_score = sum(player_cards)
         while len(dealer_cards) < 2:
             dealer_cards.append(random.choice(cards))
-            print(dealer_cards)
-        if len(dealer_cards) ==2 and len(player_cards) == 2:
-             print(f"You have: {player_cards[0]}, {player_cards[1]} dealer has: {dealer_cards[1]}")
-             print(player_score)
-             print(dealer_score)
-             break
+            dealer_score = sum(dealer_cards)
+        if len(dealer_cards) == 2 and len(player_cards) == 2:
+            return player_cards, dealer_cards, player_score, dealer_score
 
-print(player_cards)
-print(dealer_cards)
+while play_blackjack:
+    if dealing == True:
+        player_cards, dealer_cards, player_score, dealer_score = start_dealing(player_cards, dealer_cards, player_score, dealer_score)
+        print(player_cards, dealer_cards, player_score, dealer_score)
+        if dealer_blackjack:
+            print("Dealer has blackjack, you lose!")
+        elif player_blackjack:
+            print("You hit blackjack, you win!")
+        if len(dealer_cards) == 2 and len(player_cards) == 2:
+            dealing = False
+            print("Finished dealing starting hands")
+            print(f"You have: {player_cards[0]}, {player_cards[1]} dealer has: {dealer_cards[1]}")
+    break
+
+
+while player_score > 21 and 11 in player_cards:
+    player_score -= 10
+
+while dealer_score > 21 and 11 in dealer_cards:
+    dealer_score -= 10
 
 
 
 # Requirements: 
 
-# detect when computer or user has blackjack (A + 10 value cards)
-
-
-
-# if computer gets blackjack, then user loses, (even if user also has blackjack)
-# if user gets blackjack they win unless computer also has blackjack
-
-# calculate users and computers scores based on their card values
 
 # if A drawn count it as 11
 # but if total goes over 21 count as 1
