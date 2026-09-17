@@ -61,7 +61,7 @@ def player_drawing(draw, player_score, player_cards, dealer_cards):
             if draw == 'y':
                 player_cards.append(random.choice(cards))
                 player_score = sum(player_cards)
-                print(f"You have: {player_score}")
+                print(f"You have: {player_score}, {player_cards}")
                 print(f"Dealer shows: {dealer_cards[0]}")
             elif draw == 'n':
                 break
@@ -72,16 +72,20 @@ while play_blackjack:
     dealer_cards = []
     player_score = 0
     dealer_score = 0
+    while player_score > 21 and 11 in player_cards:
+        player_score -= 10
+    while dealer_score > 21 and 11 in dealer_cards:
+        dealer_score -= 10
     dealer_blackjack, player_blackjack, player_cards, dealer_cards, player_score, dealer_score = starting_hands(player_cards, dealer_cards, player_score, dealer_score)
     if dealer_blackjack or player_blackjack:
          play_blackjack = False
     draw, player_score, player_cards, dealer_cards = player_drawing(draw, player_score, player_cards, dealer_cards)
     break # TEMP REMOVE ONCE PLAYER DRAWING IS BUILT IT     
     
-# while player_score > 21 and 11 in player_cards:
-#     player_score -= 10
-# while dealer_score > 21 and 11 in dealer_cards:
-#     dealer_score -= 10
+while player_score > 21 and 11 in player_cards:
+    player_score -= 10
+while dealer_score > 21 and 11 in dealer_cards:
+    dealer_score -= 10
 
 # draw, player_score, player_cards, dealer_cards = player_drawing(draw, player_score, player_cards, dealer_cards)
 
