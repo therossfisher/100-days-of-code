@@ -15,22 +15,17 @@ import random
 ## if user gets blackjack they win unless computer also has blackjack
 
 ## calculate users and computers scores based on their card values
+# reveal computers first card to user
+# game ends immediately when user score goes over 21
+# or if user or computer get blackjack
+
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10 ,10, 10 ]
 
-player_cards = []
-
-dealer_cards = []
-
-player_score = 0
-
-dealer_score = 0
-
-dealer_blackjack = dealer_cards == [10,11] or dealer_cards == [11,10]
-player_blackjack = player_cards == [10,11] or player_cards == [11,10]
 
 play_blackjack = True
 dealing = True
+draw = True
 
 def start_dealing(player_cards, dealer_cards, player_score, dealer_score):
         while len(player_cards) < 2:
@@ -39,44 +34,72 @@ def start_dealing(player_cards, dealer_cards, player_score, dealer_score):
         while len(dealer_cards) < 2:
             dealer_cards.append(random.choice(cards))
             dealer_score = sum(dealer_cards)
-        if len(dealer_cards) == 2 and len(player_cards) == 2:
-            return player_cards, dealer_cards, player_score, dealer_score
+        return player_cards, dealer_cards, player_score, dealer_score
 
-while play_blackjack:
-    if dealing == True:
+        
+def starting_hands(player_cards, dealer_cards, player_score, dealer_score):
         player_cards, dealer_cards, player_score, dealer_score = start_dealing(player_cards, dealer_cards, player_score, dealer_score)
+        dealer_blackjack = dealer_cards == [10,11] or dealer_cards == [11,10]
+        player_blackjack = player_cards == [10,11] or player_cards == [11,10]
         print(player_cards, dealer_cards, player_score, dealer_score)
+        if len(dealer_cards) == 2 and len(player_cards) == 2:
+            print("Finished dealing starting hands")
+            print(f"You have: {player_cards[0]}, {player_cards[1]} dealer has: {dealer_cards[1]}")
         if dealer_blackjack:
             print("Dealer has blackjack, you lose!")
         elif player_blackjack:
             print("You hit blackjack, you win!")
-        if len(dealer_cards) == 2 and len(player_cards) == 2:
-            dealing = False
-            print("Finished dealing starting hands")
-            print(f"You have: {player_cards[0]}, {player_cards[1]} dealer has: {dealer_cards[1]}")
-    break
+        return dealer_blackjack, player_blackjack, player_cards, dealer_cards, player_score, dealer_score
 
+def player_drawing(draw, player_score, player_cards, dealer_cards):
+    while player_score < 21:
+            while True:
+                draw = input("Would you like another card? Type 'y' to draw or 'n' to stand.\n")
+                if draw in ['y', 'n']:
+                    break
+                print("Invalid, try again!")
+            if draw == 'y':
+                player_cards.append(random.choice(cards))
+                player_score = sum(player_cards)
+                print(f"You have: {player_score}")
+                print(f"Dealer shows: {dealer_cards[0]}")
+            elif draw == 'n':
+                break
+    return draw, player_score, player_cards, dealer_cards
+    
+while play_blackjack:
+    player_cards = []
+    dealer_cards = []
+    player_score = 0
+    dealer_score = 0
+    dealer_blackjack, player_blackjack, player_cards, dealer_cards, player_score, dealer_score = starting_hands(player_cards, dealer_cards, player_score, dealer_score)
+    if dealer_blackjack or player_blackjack:
+         play_blackjack = False
+    draw, player_score, player_cards, dealer_cards = player_drawing(draw, player_score, player_cards, dealer_cards)
+    break # TEMP REMOVE ONCE PLAYER DRAWING IS BUILT IT     
+    
+# while player_score > 21 and 11 in player_cards:
+#     player_score -= 10
+# while dealer_score > 21 and 11 in dealer_cards:
+#     dealer_score -= 10
 
-while player_score > 21 and 11 in player_cards:
-    player_score -= 10
+# draw, player_score, player_cards, dealer_cards = player_drawing(draw, player_score, player_cards, dealer_cards)
 
-while dealer_score > 21 and 11 in dealer_cards:
-    dealer_score -= 10
-
+# while dealing:
+#         player_cards, dealer_cards, player_score, dealer_score = start_dealing(player_cards, dealer_cards, player_score, dealer_score)
+            
+        
+# ask the user if they want to get another card
 
 
 # Requirements: 
 
 
-# if A drawn count it as 11
-# but if total goes over 21 count as 1
 
-# reveal computers first card to user
 
-# game ends immediately when user score goes over 21
-# or if user or computer get blackjack
 
-# ask the user if they want to get another card
+
+
 
 # once user is done and no longer wants more cards:
 # let computer play
