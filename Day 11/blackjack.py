@@ -1,122 +1,148 @@
-# Rules:
-# deck is unlimited size
-# no jokers
-# J/Q/K all count as 10
-# A counts as 11 or 1
-# all cards have equal probablity of being drawn
-# cards not removed from deck as they are drawn
-# computer is the dealer
-
-
 import random
 
-## deal both user and computer a starting hand of 2 random card values
-## detect when computer or user has blackjack (A + 10 value cards)# if computer gets blackjack, then user loses, (even if user also has blackjack)
-## if user gets blackjack they win unless computer also has blackjack
-
-## calculate users and computers scores based on their card values
-# reveal computers first card to user
-# game ends immediately when user score goes over 21
-# or if user or computer get blackjack
-
+from art import logo
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10 ,10, 10 ]
 
-
 play_blackjack = True
-dealing = True
-draw = True
 
-def start_dealing(player_cards, dealer_cards, player_score, dealer_score):
-        while len(player_cards) < 2:
-            player_cards.append(random.choice(cards))
-            player_score = sum(player_cards)
-        while len(dealer_cards) < 2:
-            dealer_cards.append(random.choice(cards))
-            dealer_score = sum(dealer_cards)
-        return player_cards, dealer_cards, player_score, dealer_score
+def get_score(hand):
+    return sum(hand["cards"]) 
 
-        
-def starting_hands(player_cards, dealer_cards, player_score, dealer_score):
-        player_cards, dealer_cards, player_score, dealer_score = start_dealing(player_cards, dealer_cards, player_score, dealer_score)
-        dealer_blackjack = dealer_cards == [10,11] or dealer_cards == [11,10]
-        player_blackjack = player_cards == [10,11] or player_cards == [11,10]
-        print(player_cards, dealer_cards, player_score, dealer_score)
-        if len(dealer_cards) == 2 and len(player_cards) == 2:
-            print("Finished dealing starting hands")
-            print(f"You have: {player_cards[0]}, {player_cards[1]} dealer has: {dealer_cards[1]}")
-        if dealer_blackjack:
-            print("Dealer has blackjack, you lose!")
-        elif player_blackjack:
-            print("You hit blackjack, you win!")
-        return dealer_blackjack, player_blackjack, player_cards, dealer_cards, player_score, dealer_score
+def get_card_count(hand):
+    return len(hand["cards"])
 
-def player_drawing(draw, player_score, player_cards, dealer_cards):
-    while player_score < 21:
-            while True:
-                draw = input("Would you like another card? Type 'y' to draw or 'n' to stand.\n")
-                if draw in ['y', 'n']:
-                    break
-                print("Invalid, try again!")
-            if draw == 'y':
-                player_cards.append(random.choice(cards))
-                player_score = sum(player_cards)
-                print(f"You have: {player_score}, {player_cards}")
-                print(f"Dealer shows: {dealer_cards[0]}")
-            elif draw == 'n':
+def get_dealer_hand(dealer):
+    return dealer["cards"]
+
+def get_player_hand(player):
+    return player["cards"]
+
+def blackjack(hand):
+    return get_card_count(hand) == 2 and get_score(hand) == 21
+
+
+def busted(hand):
+    return get_score(hand) > 21
+
+
+def end_game_score(player, dealer):
+    print(f"Dealer score is: {get_score(dealer)}\n")
+    print(f"Your score is: {get_score(player)}\n")
+    if get_score(player) > get_score(dealer):
+        print("You win!")
+    elif get_score(player) < get_score(dealer):
+        print(f"Dealer score is: {get_score(dealer)}\n")
+        print(f"Your score is: {get_score(player)}\n")
+        print("Dealer wins!")
+    else:
+        print("Push!")
+
+
+
+player = {
+    "cards": [],
+}
+
+dealer = {
+    "cards": [],
+}
+
+
+def start_new_game(play_blackjack):
+        while play_blackjack:
+            play_again = input("Would you like to play again? Type 'y' for yes, or 'q' to quit.\n")
+            if play_again in ['y', 'q']:
                 break
-    return draw, player_score, player_cards, dealer_cards
-    
-while play_blackjack:
-    player_cards = []
-    dealer_cards = []
-    player_score = 0
-    dealer_score = 0
-    while player_score > 21 and 11 in player_cards:
-        player_score -= 10
-    while dealer_score > 21 and 11 in dealer_cards:
-        dealer_score -= 10
-    dealer_blackjack, player_blackjack, player_cards, dealer_cards, player_score, dealer_score = starting_hands(player_cards, dealer_cards, player_score, dealer_score)
-    if dealer_blackjack or player_blackjack:
-         play_blackjack = False
-    draw, player_score, player_cards, dealer_cards = player_drawing(draw, player_score, player_cards, dealer_cards)
-    break # TEMP REMOVE ONCE PLAYER DRAWING IS BUILT IT     
-    
-while player_score > 21 and 11 in player_cards:
-    player_score -= 10
-while dealer_score > 21 and 11 in dealer_cards:
-    dealer_score -= 10
-
-# draw, player_score, player_cards, dealer_cards = player_drawing(draw, player_score, player_cards, dealer_cards)
-
-# while dealing:
-#         player_cards, dealer_cards, player_score, dealer_score = start_dealing(player_cards, dealer_cards, player_score, dealer_score)
-            
+            print("Invalid, try again!")
+        if play_again == 'y':
+            return True
+        if play_again == 'q':
+            print("Thanks for playing!")
+            quit()
+  
         
-# ask the user if they want to get another card
+def dealing(player, dealer):
+        print("Welcome to blackjack!")
+        while get_card_count(player) < 2 and get_card_count(dealer) < 2:
+            player["cards"].append(random.choice(cards))
+            dealer["cards"].append(random.choice(cards))
+        if get_card_count(player) == 2 and get_card_count(dealer) == 2:
+            print("Finished dealing starting hands")
+            print(f"You have: {player['cards']} dealer shows: {dealer['cards'][1]}")
+            print(f"Your score is: {get_score(player)}\n")
+            return True
 
 
-# Requirements: 
+def drawing(player):
+    while get_score(player) < 21:
+        while True:
+            draw = input("Would you like another card? Type 'y' to draw or 'n' to stand.\n")
+            if draw in ['y', 'n']:
+                break
+            print("Invalid, try again!")
+        if draw == 'y':
+            player["cards"].append(random.choice(cards))
+            print(f"You have: {player['cards']}\n")
+            print(f"Your score is: {get_score(player)}\n")
+            print(f"Dealer shows: {dealer['cards'][1]}\n")
+        if busted(player):
+            print(f"You busted. Dealer wins!!")
+            return False
+        if draw == 'n':
+            return True
+    
+def dealer_play(dealer):
+    while get_score(dealer) < 16:
+        print(f"Dealer has: {dealer['cards']}\n")
+        print(f"Dealer is drawing cards... \n")
+        dealer["cards"].append(random.choice(cards))
+        print(f"Dealer score is now: {get_score(dealer)}\n")
+        if busted(dealer):
+            print(f"Dealer busts. You win!!")
+            break
+    return get_score(dealer)
 
 
+def main_game(play_blackjack):
+        while True:
+            play_game = input("Would you like to play Black Jack? Type 'y' to play or 'n' to quit.\n")
+            if play_game in ['y', 'n']:
+                break
+            print("Invalid, try again!")
+        if play_game == 'n':
+            print("Have a nice day!")
+            play_blackjack = False
+            quit()
+        while play_blackjack:
+            print("\n" * 100)
+            print(logo)
+            player["cards"].clear()
+            dealer["cards"].clear()
+            dealing_result = dealing(player, dealer)
+            if blackjack(player) and blackjack(dealer):
+                print("Both have blackjack! Push!")
+                start_new_game(play_blackjack)
+                continue
+            elif blackjack(player):
+                print("You made blackjack! You win!")
+                start_new_game(play_blackjack)
+                continue
+            elif blackjack(dealer):
+                print("Dealer has blackjack! Dealer wins!")
+                start_new_game(play_blackjack)
+                continue
+            if dealing_result:
+                drawing_result = drawing(player)
+            if busted(player):
+                start_new_game(play_blackjack)
+                continue
+            if drawing_result:
+                dealer_play(dealer)
+            if busted(dealer):
+                start_new_game(play_blackjack)
+                continue
+            end_game_score(player, dealer)
+            start_new_game(play_blackjack)
 
-
-
-
-
-
-# once user is done and no longer wants more cards:
-# let computer play
-# computer should keep drawing cards unless score goes over 16
-
-# compare user and computer scores:
-# win, loss or draw
-
-# print user and computers final hand and score at end of game
-
-# after game ends, ask user if they want to play again
-# clear console for a fresh start
-
-# start_game = input("Do you want to play a game of Blackjack? Type 'y' or 'n'.")
-
-
+main_game(play_blackjack)
