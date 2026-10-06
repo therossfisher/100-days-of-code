@@ -8,8 +8,10 @@ play_blackjack = True
 
 def get_score(hand):
     score = sum(hand["cards"]) 
-    if score > 21 and 11 in hand["cards"]:
+    ace_count = hand["cards"].count(11)
+    while score > 21 and ace_count > 0:
         score -= 10
+        ace_count -= 1
     return score
 
 def get_card_count(hand):
