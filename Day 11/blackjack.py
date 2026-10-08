@@ -88,6 +88,8 @@ def drawing(player):
                 break
             print("Invalid, try again!")
         if draw == 'y':
+            print("Dealing...")
+            time.sleep(2.5)
             player["cards"].append(random.choice(cards))
             print(f"You have: {player['cards']}\n")
             print(f"Your score is: {get_score(player)}\n")
@@ -96,13 +98,15 @@ def drawing(player):
             print(f"You busted. Dealer wins!!")
             return False
         if draw == 'n':
+            print("Dealers turn...\n")
+            time.sleep(2.5)
             return True
     
 def dealer_play(dealer):
     while get_score(dealer) < 16:
         print(f"Dealer has: {dealer['cards']}\n")
         print(f"Dealer is drawing cards... \n")
-        time.sleep(3.5)
+        time.sleep(2.5)
         dealer["cards"].append(random.choice(cards))
         print(f"Dealer score is now: {get_score(dealer)}\n")
         if busted(dealer):
@@ -128,24 +132,29 @@ def main_game(play_blackjack):
             dealing_result = dealing(player, dealer)
             if blackjack(player) and blackjack(dealer):
                 print("Both have blackjack! Push!")
+                print(f"{end_game_score(player, dealer)}")
                 start_new_game(play_blackjack)
                 continue
             elif blackjack(player):
                 print("You made blackjack! You win!")
+                print(f"{end_game_score(player, dealer)}")
                 start_new_game(play_blackjack)
                 continue
             elif blackjack(dealer):
                 print("Dealer has blackjack! Dealer wins!")
+                print(f"{end_game_score(player, dealer)}")
                 start_new_game(play_blackjack)
                 continue
             if dealing_result:
                 drawing_result = drawing(player)
             if busted(player):
+                print(f"{end_game_score(player, dealer)}")
                 start_new_game(play_blackjack)
                 continue
             if drawing_result:
                 dealer_play(dealer)
             if busted(dealer):
+                print(f"{end_game_score(player, dealer)}")
                 start_new_game(play_blackjack)
                 continue
             end_game_score(player, dealer)
