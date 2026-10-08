@@ -26,10 +26,8 @@ def get_player_hand(player):
 def blackjack(hand):
     return get_card_count(hand) == 2 and get_score(hand) == 21
 
-
 def busted(hand):
     return get_score(hand) > 21
-
 
 def end_game_score(player, dealer):
     if get_score(player) > get_score(dealer):
@@ -51,8 +49,6 @@ def end_game_score(player, dealer):
         print(f"Your score is: {get_score(player)}\n")
         print("Push!")
 
-
-
 player = {
     "cards": [],
 }
@@ -60,7 +56,6 @@ player = {
 dealer = {
     "cards": [],
 }
-
 
 def start_new_game(play_blackjack):
         while play_blackjack:
@@ -74,7 +69,6 @@ def start_new_game(play_blackjack):
             print("Thanks for playing!")
             quit()
   
-        
 def dealing(player, dealer):
         print("Welcome to blackjack!")
         while get_card_count(player) < 2 and get_card_count(dealer) < 2:
@@ -85,7 +79,6 @@ def dealing(player, dealer):
             print(f"You have: {player['cards']} dealer shows: {dealer['cards'][1]}")
             print(f"Your score is: {get_score(player)}\n")
             return True
-
 
 def drawing(player):
     while get_score(player) < 21:
@@ -116,7 +109,6 @@ def dealer_play(dealer):
             print(f"Dealer busts. You win!!")
             break
     return get_score(dealer)
-
 
 def main_game(play_blackjack):
         while True:
