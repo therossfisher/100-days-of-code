@@ -1,5 +1,5 @@
 import random
-
+import time
 from art import logo
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10 ,10, 10 ]
@@ -32,15 +32,23 @@ def busted(hand):
 
 
 def end_game_score(player, dealer):
-    print(f"Dealer score is: {get_score(dealer)}\n")
-    print(f"Your score is: {get_score(player)}\n")
     if get_score(player) > get_score(dealer):
+        print(f"Dealer final hand is: {get_dealer_hand(dealer)}\n")
+        print(f"Dealer score is: {get_score(dealer)}\n")
+        print(f"Your final hand is: {get_player_hand(player)}\n")
+        print(f"Your score is: {get_score(player)}\n")
         print("You win!")
     elif get_score(player) < get_score(dealer):
+        print(f"Dealer final hand is: {get_dealer_hand(dealer)}\n")
         print(f"Dealer score is: {get_score(dealer)}\n")
+        print(f"Your final hand is: {get_player_hand(player)}\n")
         print(f"Your score is: {get_score(player)}\n")
         print("Dealer wins!")
     else:
+        print(f"Dealer final hand is: {get_dealer_hand(dealer)}\n")
+        print(f"Dealer score is: {get_score(dealer)}\n")
+        print(f"Your final hand is: {get_player_hand(player)}\n")
+        print(f"Your score is: {get_score(player)}\n")
         print("Push!")
 
 
@@ -101,6 +109,7 @@ def dealer_play(dealer):
     while get_score(dealer) < 16:
         print(f"Dealer has: {dealer['cards']}\n")
         print(f"Dealer is drawing cards... \n")
+        time.sleep(3.5)
         dealer["cards"].append(random.choice(cards))
         print(f"Dealer score is now: {get_score(dealer)}\n")
         if busted(dealer):
